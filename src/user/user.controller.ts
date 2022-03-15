@@ -1,54 +1,76 @@
-import { UserDto } from './../entities/user.dto';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  UseGuards,
+} from '@nestjs/common';
+import {
+  ApiBearerAuth,
+  ApiBody,
+  ApiOperation,
+  ApiResponse,
+} from '@nestjs/swagger';
+import { AuthService } from './auth.service';
+import { JwtAuthGuard } from './jwt-auth.guard';
+import { UserDto } from './user.entity';
 import { UserService } from './user.service';
-import { Body, Controller, Delete, Get, Param, Put } from '@nestjs/common';
-import { ApiBody, ApiOperation, ApiResponse } from '@nestjs/swagger';
-import { Post } from '@nestjs/common';
 
 @Controller('user')
 export class UserController {
-  constructor(private UserService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private authService: AuthService,
+  ) {}
 
   @ApiBody({ type: UserDto })
-  @ApiOperation({
-    summary: 'Add new Users',
-    operationId: 'AddUsers',
-  })
+  @ApiOperation({ summary: 'Add new user', operationId: 'AddUser' })
   @ApiResponse({ status: 200, type: UserDto })
-  @Post()
-  async create(@Body() job: UserDto): Promise<UserDto> {
-    return this.UserService.create(job);
+  @Post('/create')
+  create(@Body() user: UserDto) {
+    return this.authService.register(user);
   }
 
-  @ApiOperation({ summary: 'Get all Users', operationId: 'GetUserss' })
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
+  @ApiOperation({ summary: 'Get all users', operationId: 'GetUsers' })
   @ApiResponse({ status: 200, type: UserDto })
   @Get()
   async findAll(): Promise<UserDto[]> {
-    return this.UserService.findAll();
+    return this.userService.findAll();
   }
 
-  @ApiOperation({ summary: 'Get Users by id', operationId: 'GetUsers' })
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
+  @ApiOperation({ summary: 'Get user by id', operationId: 'GetUser' })
   @ApiResponse({ status: 200, type: UserDto })
-  @Get(':userID')
-  async findOne(@Param('userID') id: number): Promise<UserDto> {
-    return this.UserService.findOne(id);
-  }
-  @ApiOperation({
-    summary: 'Update Users by id',
-    operationId: 'UpdateUsers',
-  })
-  @ApiResponse({ status: 200, type: UserDto })
-  @Put(':userID')
-  async update(@Param('userID') id: number, @Body() job: UserDto) {
-    return this.UserService.update(id, job);
+  @Get(':id')
+  async findOne(@Param('id') id: number): Promise<UserDto> {
+    const user = await this.userService.findOne(id);
+    return {
+      ...user,
+      password: undefined,
+    };
   }
 
-  @ApiOperation({
-    summary: 'Delete Users by id',
-    operationId: 'DeleteUsers',
-  })
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
+  @ApiOperation({ summary: 'Update user by id', operationId: 'UpdateUser' })
   @ApiResponse({ status: 200, type: UserDto })
-  @Delete(':userID')
-  async delete(@Param('userID') id: number) {
-    return this.UserService.deleteOne(id);
+  @Put(':id')
+  async update(@Param('id') id: number, @Body() user: UserDto) {
+    return this.userService.update(id, user);
+  }
+
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
+  @ApiOperation({ summary: 'Delete user by id', operationId: 'DeleteUser' })
+  @ApiResponse({ status: 200, type: UserDto })
+  @Delete(':id')
+  async delete(@Param('id') id: number) {
+    return this.userService.deleteOne(id);
   }
 }

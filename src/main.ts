@@ -10,7 +10,13 @@ async function bootstrap() {
     .setDescription('The enrollment system API')
     .setVersion('1.0')
     .addTag('enrollment')
+    .addBearerAuth()
     .build();
+  app.enableCors({
+    origin: true,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    credentials: true,
+  });
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 

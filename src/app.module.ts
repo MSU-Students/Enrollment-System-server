@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserDto } from './entities/user.dto';
 import { UserController } from './user/user.controller';
 import { UserService } from './user/user.service';
 import { TeacherController } from './teacher/teacher.controller';
@@ -12,10 +11,12 @@ import { RoomDto } from './entities/room.dto';
 import { SubjectController } from './subject/subject.controller';
 import { SubjectService } from './subject/subject.service';
 import { SubjectDto } from './entities/subject.dto';
+import { AuthModule } from './user/auth.module';
+import { UserDto } from './user';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([UserDto, TeacherDto, RoomDto, SubjectDto]),
+    TypeOrmModule.forFeature([TeacherDto, RoomDto, SubjectDto, UserDto]),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
@@ -23,10 +24,11 @@ import { SubjectDto } from './entities/subject.dto';
       username: 'root',
       password: 'root',
       database: 'enrollmentDB',
-      entities: [UserDto, TeacherDto, RoomDto, SubjectDto],
+      entities: [TeacherDto, RoomDto, SubjectDto, UserDto],
       synchronize: true,
       dropSchema: true,
     }),
+    AuthModule,
   ],
   controllers: [
     UserController,

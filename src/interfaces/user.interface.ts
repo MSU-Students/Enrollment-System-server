@@ -1,10 +1,11 @@
 export interface User {
-    id?:number
-    fName:string
-    lName:string
-    mName: string
-    userName: string
-    password:string
-    userType:'Admin' | 'Chairperson' | 'Registrar'
-
+  id?: number;
+  FName: string;
+  MName?: string;
+  LName: string;
+  username?: string;
+  password?: string;
+  userType?: 'admin' | 'chairperson' | 'registrar';
+  contact?: string;
+  email?: string;
 }
