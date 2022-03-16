@@ -1,3 +1,4 @@
+import { AdmissionDto } from 'src/entities/admission.dto';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserController } from './user/user.controller';
@@ -13,10 +14,18 @@ import { SubjectService } from './subject/subject.service';
 import { SubjectDto } from './entities/subject.dto';
 import { AuthModule } from './user/auth.module';
 import { UserDto } from './user';
+import { AdmissionController } from './admission/admission.controller';
+import { AdmissionService } from './admission/admission.service';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([TeacherDto, RoomDto, SubjectDto, UserDto]),
+    TypeOrmModule.forFeature([
+      TeacherDto,
+      RoomDto,
+      SubjectDto,
+      UserDto,
+      AdmissionDto,
+    ]),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
@@ -24,7 +33,7 @@ import { UserDto } from './user';
       username: 'root',
       password: 'root',
       database: 'enrollmentDB',
-      entities: [TeacherDto, RoomDto, SubjectDto, UserDto],
+      entities: [TeacherDto, RoomDto, SubjectDto, UserDto, AdmissionDto],
       synchronize: true,
       dropSchema: true,
     }),
@@ -35,7 +44,14 @@ import { UserDto } from './user';
     TeacherController,
     RoomController,
     SubjectController,
+    AdmissionController,
   ],
-  providers: [UserService, TeacherService, RoomService, SubjectService],
+  providers: [
+    UserService,
+    TeacherService,
+    RoomService,
+    SubjectService,
+    AdmissionService,
+  ],
 })
 export class AppModule {}
