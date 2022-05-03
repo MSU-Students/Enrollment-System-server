@@ -16,13 +16,13 @@ export class RoomService {
   async findAll(): Promise<RoomDto[]> {
     return this.usersRepository.find();
   }
-  async findOne(usersID: number): Promise<RoomDto> {
-    return this.usersRepository.findOne(usersID);
+  async findOne(roomID: number): Promise<RoomDto> {
+    return this.usersRepository.findOne(roomID);
   }
-  async update(usersID: number, application: RoomDto) {
-    return this.usersRepository.update(usersID, application);
+  async update(roomID: number, application: RoomDto) {
+    return this.usersRepository.update(roomID, application);
   }
-  async deleteOne(usersID: number) {
-    return this.usersRepository.delete(usersID);
+  async deleteOne(roomID: number) {
+    return this.usersRepository.delete(roomID);
   }
 }

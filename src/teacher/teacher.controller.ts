@@ -13,49 +13,49 @@ import { TeacherService } from './teacher.service';
 
 @Controller('teacher')
 export class TeacherController {
-  constructor(private UserService: TeacherService) {}
+  constructor(private teacherService: TeacherService) {}
 
   @ApiBody({ type: TeacherDto })
   @ApiOperation({
-    summary: 'Add new Users',
-    operationId: 'AddUsers',
+    summary: 'Add new Teachers',
+    operationId: 'AddTeachers',
   })
   @ApiResponse({ status: 200, type: TeacherDto })
   @Post()
   async create(@Body() job: TeacherDto): Promise<TeacherDto> {
-    return this.UserService.create(job);
+    return this.teacherService.create(job);
   }
 
-  @ApiOperation({ summary: 'Get all Users', operationId: 'GetUserss' })
+  @ApiOperation({ summary: 'Get all Teachers', operationId: 'GetTeachers' })
   @ApiResponse({ status: 200, type: TeacherDto })
   @Get()
   async findAll(): Promise<TeacherDto[]> {
-    return this.UserService.findAll();
+    return this.teacherService.findAll();
   }
 
-  @ApiOperation({ summary: 'Get Users by id', operationId: 'GetUsers' })
+  @ApiOperation({ summary: 'Get Teachers by id', operationId: 'GetTeacher' })
   @ApiResponse({ status: 200, type: TeacherDto })
-  @Get(':userID')
-  async findOne(@Param('userID') id: number): Promise<TeacherDto> {
-    return this.UserService.findOne(id);
+  @Get(':teacherID')
+  async findOne(@Param('teacherID') id: number): Promise<TeacherDto> {
+    return this.teacherService.findOne(id);
   }
   @ApiOperation({
-    summary: 'Update Users by id',
-    operationId: 'UpdateUsers',
+    summary: 'Update Teachers by id',
+    operationId: 'UpdateTeachers',
   })
   @ApiResponse({ status: 200, type: TeacherDto })
-  @Put(':userID')
-  async update(@Param('userID') id: number, @Body() job: TeacherDto) {
-    return this.UserService.update(id, job);
+  @Put(':teacherID')
+  async update(@Param('teacherID') id: number, @Body() job: TeacherDto) {
+    return this.teacherService.update(id, job);
   }
 
   @ApiOperation({
-    summary: 'Delete Users by id',
-    operationId: 'DeleteUsers',
+    summary: 'Delete Teachers by id',
+    operationId: 'DeleteTeacher',
   })
   @ApiResponse({ status: 200, type: TeacherDto })
-  @Delete(':userID')
-  async delete(@Param('userID') id: number) {
-    return this.UserService.deleteOne(id);
+  @Delete(':teacherID')
+  async delete(@Param('teacherID') id: number) {
+    return this.teacherService.deleteOne(id);
   }
 }

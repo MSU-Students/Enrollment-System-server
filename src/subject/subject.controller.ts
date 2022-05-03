@@ -13,49 +13,49 @@ import { SubjectService } from './subject.service';
 
 @Controller('subject')
 export class SubjectController {
-  constructor(private UserService: SubjectService) {}
+  constructor(private subjectService: SubjectService) {}
 
   @ApiBody({ type: SubjectDto })
   @ApiOperation({
-    summary: 'Add new Users',
-    operationId: 'AddUsers',
+    summary: 'Add new Subject',
+    operationId: 'AddSubject',
   })
   @ApiResponse({ status: 200, type: SubjectDto })
   @Post()
   async create(@Body() job: SubjectDto): Promise<SubjectDto> {
-    return this.UserService.create(job);
+    return this.subjectService.create(job);
   }
 
-  @ApiOperation({ summary: 'Get all Users', operationId: 'GetUserss' })
+  @ApiOperation({ summary: 'Get all Subjects', operationId: 'GetAllSubjects' })
   @ApiResponse({ status: 200, type: SubjectDto })
   @Get()
   async findAll(): Promise<SubjectDto[]> {
-    return this.UserService.findAll();
+    return this.subjectService.findAll();
   }
 
-  @ApiOperation({ summary: 'Get Users by id', operationId: 'GetUsers' })
+  @ApiOperation({ summary: 'Get Subjects by id', operationId: 'GetSubject' })
   @ApiResponse({ status: 200, type: SubjectDto })
-  @Get(':userID')
-  async findOne(@Param('userID') id: number): Promise<SubjectDto> {
-    return this.UserService.findOne(id);
+  @Get(':subjectID')
+  async findOne(@Param('subjectID') id: number): Promise<SubjectDto> {
+    return this.subjectService.findOne(id);
   }
   @ApiOperation({
-    summary: 'Update Users by id',
-    operationId: 'UpdateUsers',
+    summary: 'Update Subjects by id',
+    operationId: 'UpdateSubject',
   })
   @ApiResponse({ status: 200, type: SubjectDto })
-  @Put(':userID')
-  async update(@Param('userID') id: number, @Body() job: SubjectDto) {
-    return this.UserService.update(id, job);
+  @Put(':subjectID')
+  async update(@Param('subjectID') id: number, @Body() job: SubjectDto) {
+    return this.subjectService.update(id, job);
   }
 
   @ApiOperation({
-    summary: 'Delete Users by id',
-    operationId: 'DeleteUsers',
+    summary: 'Delete Subjects by id',
+    operationId: 'DeleteOneSubject',
   })
   @ApiResponse({ status: 200, type: SubjectDto })
-  @Delete(':userID')
-  async delete(@Param('userID') id: number) {
-    return this.UserService.deleteOne(id);
+  @Delete(':subjectID')
+  async delete(@Param('subjectID') id: number) {
+    return this.subjectService.deleteOne(id);
   }
 }

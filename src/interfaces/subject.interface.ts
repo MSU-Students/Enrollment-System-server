@@ -6,4 +6,8 @@ export interface Subject {
   DescriptiveTitle: string;
   Prerequisite: string;
   Units: string;
+  Day: string;
+  Day2: string;
+  Time: string;
+  Time2: string;
 }

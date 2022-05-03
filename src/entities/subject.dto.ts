@@ -30,4 +30,20 @@ export class SubjectDto implements Subject {
   @ApiProperty({ example: '3' })
   @Column()
   Units: string;
+
+  @ApiProperty({ example: 'Monday' })
+  @Column()
+  Day: string;
+
+  @ApiProperty({ example: 'Wednesday' })
+  @Column()
+  Day2: string;
+
+  @ApiProperty({ example: '08:00' })
+  @Column()
+  Time: string;
+
+  @ApiProperty({ example: '10:00' })
+  @Column()
+  Time2: string;
 }

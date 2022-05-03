@@ -13,49 +13,52 @@ import { AdmissionService } from './admission.service';
 
 @Controller('admission')
 export class AdmissionController {
-  constructor(private UserService: AdmissionService) {}
+  constructor(private admissionService: AdmissionService) {}
 
   @ApiBody({ type: AdmissionDto })
   @ApiOperation({
-    summary: 'Add new Users',
-    operationId: 'AddUsers',
+    summary: 'Add new Admissions',
+    operationId: 'AddAdmissions',
   })
   @ApiResponse({ status: 200, type: AdmissionDto })
   @Post()
   async create(@Body() job: AdmissionDto): Promise<AdmissionDto> {
-    return this.UserService.create(job);
+    return this.admissionService.create(job);
   }
 
-  @ApiOperation({ summary: 'Get all Users', operationId: 'GetUserss' })
+  @ApiOperation({ summary: 'Get all Admissions', operationId: 'GetAdmissions' })
   @ApiResponse({ status: 200, type: AdmissionDto })
   @Get()
   async findAll(): Promise<AdmissionDto[]> {
-    return this.UserService.findAll();
-  }
-
-  @ApiOperation({ summary: 'Get Users by id', operationId: 'GetUsers' })
-  @ApiResponse({ status: 200, type: AdmissionDto })
-  @Get(':userID')
-  async findOne(@Param('userID') id: number): Promise<AdmissionDto> {
-    return this.UserService.findOne(id);
-  }
-  @ApiOperation({
-    summary: 'Update Users by id',
-    operationId: 'UpdateUsers',
-  })
-  @ApiResponse({ status: 200, type: AdmissionDto })
-  @Put(':userID')
-  async update(@Param('userID') id: number, @Body() job: AdmissionDto) {
-    return this.UserService.update(id, job);
+    return this.admissionService.findAll();
   }
 
   @ApiOperation({
-    summary: 'Delete Users by id',
-    operationId: 'DeleteUsers',
+    summary: 'Get Admissions by id',
+    operationId: 'GetAdmission',
   })
   @ApiResponse({ status: 200, type: AdmissionDto })
-  @Delete(':userID')
-  async delete(@Param('userID') id: number) {
-    return this.UserService.deleteOne(id);
+  @Get(':admissionID')
+  async findOne(@Param('admissionID') id: number): Promise<AdmissionDto> {
+    return this.admissionService.findOne(id);
+  }
+  @ApiOperation({
+    summary: 'Update Admission by id',
+    operationId: 'UpdateAdmissions',
+  })
+  @ApiResponse({ status: 200, type: AdmissionDto })
+  @Put(':admissionID')
+  async update(@Param('admissionID') id: number, @Body() job: AdmissionDto) {
+    return this.admissionService.update(id, job);
+  }
+
+  @ApiOperation({
+    summary: 'Delete Admissions by id',
+    operationId: 'DeleteAdmissions',
+  })
+  @ApiResponse({ status: 200, type: AdmissionDto })
+  @Delete(':admissionID')
+  async delete(@Param('admissionID') id: number) {
+    return this.admissionService.deleteOne(id);
   }
 }

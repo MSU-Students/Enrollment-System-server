@@ -5,23 +5,23 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 @Entity('Admission')
 export class AdmissionDto implements Admission {
   @PrimaryGeneratedColumn()
-  admissionID?: string;
+  admissionID?: number;
 
   @ApiProperty({ example: '' })
   @Column()
-  reportCard: string;
+  reportCard: boolean;
 
   @ApiProperty({ example: '' })
   @Column()
-  bCertificate: string;
+  bCertificate: boolean;
 
   @ApiProperty({ example: '' })
   @Column()
-  Pic: string;
+  Pic: boolean;
 
   @ApiProperty({ example: '' })
   @Column()
-  eForm: string;
+  eForm: boolean;
 
   @ApiProperty({ example: '201810757' })
   @Column()

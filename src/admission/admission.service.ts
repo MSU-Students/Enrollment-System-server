@@ -16,13 +16,13 @@ export class AdmissionService {
   async findAll(): Promise<AdmissionDto[]> {
     return this.usersRepository.find();
   }
-  async findOne(usersID: number): Promise<AdmissionDto> {
-    return this.usersRepository.findOne(usersID);
+  async findOne(admissionID: number): Promise<AdmissionDto> {
+    return this.usersRepository.findOne(admissionID);
   }
-  async update(usersID: number, application: AdmissionDto) {
-    return this.usersRepository.update(usersID, application);
+  async update(admissionID: number, application: AdmissionDto) {
+    return this.usersRepository.update(admissionID, application);
   }
-  async deleteOne(usersID: number) {
-    return this.usersRepository.delete(usersID);
+  async deleteOne(admissionID: number) {
+    return this.usersRepository.delete(admissionID);
   }
 }

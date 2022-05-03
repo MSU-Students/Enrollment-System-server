@@ -16,13 +16,13 @@ export class SubjectService {
   async findAll(): Promise<SubjectDto[]> {
     return this.usersRepository.find();
   }
-  async findOne(usersID: number): Promise<SubjectDto> {
-    return this.usersRepository.findOne(usersID);
+  async findOne(subjectID: number): Promise<SubjectDto> {
+    return this.usersRepository.findOne(subjectID);
   }
-  async update(usersID: number, application: SubjectDto) {
-    return this.usersRepository.update(usersID, application);
+  async update(subjectID: number, application: SubjectDto) {
+    return this.usersRepository.update(subjectID, application);
   }
-  async deleteOne(usersID: number) {
-    return this.usersRepository.delete(usersID);
+  async deleteOne(subjectID: number) {
+    return this.usersRepository.delete(subjectID);
   }
 }

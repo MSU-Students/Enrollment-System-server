@@ -1,9 +1,9 @@
 export interface Admission {
-  admissionID?: string;
-  reportCard: string;
-  bCertificate: string;
-  Pic: string;
-  eForm: string;
+  admissionID?: number;
+  reportCard: boolean;
+  bCertificate: boolean;
+  Pic: boolean;
+  eForm: boolean;
   IdNum: string;
   lrn: string;
   ayCode: string;

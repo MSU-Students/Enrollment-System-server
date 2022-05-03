@@ -16,13 +16,13 @@ export class TeacherService {
   async findAll(): Promise<TeacherDto[]> {
     return this.usersRepository.find();
   }
-  async findOne(usersID: number): Promise<TeacherDto> {
-    return this.usersRepository.findOne(usersID);
+  async findOne(teacherID: number): Promise<TeacherDto> {
+    return this.usersRepository.findOne(teacherID);
   }
-  async update(usersID: number, application: TeacherDto) {
-    return this.usersRepository.update(usersID, application);
+  async update(teacherID: number, application: TeacherDto) {
+    return this.usersRepository.update(teacherID, application);
   }
-  async deleteOne(usersID: number) {
-    return this.usersRepository.delete(usersID);
+  async deleteOne(teacherID: number) {
+    return this.usersRepository.delete(teacherID);
   }
 }

@@ -13,49 +13,49 @@ import { RoomService } from './room.service';
 
 @Controller('room')
 export class RoomController {
-  constructor(private UserService: RoomService) {}
+  constructor(private roomService: RoomService) {}
 
   @ApiBody({ type: RoomDto })
   @ApiOperation({
-    summary: 'Add new Users',
-    operationId: 'AddUsers',
+    summary: 'Add new Rooms',
+    operationId: 'AddRooms',
   })
   @ApiResponse({ status: 200, type: RoomDto })
   @Post()
   async create(@Body() job: RoomDto): Promise<RoomDto> {
-    return this.UserService.create(job);
+    return this.roomService.create(job);
   }
 
-  @ApiOperation({ summary: 'Get all Users', operationId: 'GetUserss' })
+  @ApiOperation({ summary: 'Get all Rooms', operationId: 'GetRooms' })
   @ApiResponse({ status: 200, type: RoomDto })
   @Get()
   async findAll(): Promise<RoomDto[]> {
-    return this.UserService.findAll();
+    return this.roomService.findAll();
   }
 
-  @ApiOperation({ summary: 'Get Users by id', operationId: 'GetUsers' })
+  @ApiOperation({ summary: 'Get Rooms by id', operationId: 'GetRoom' })
   @ApiResponse({ status: 200, type: RoomDto })
-  @Get(':userID')
-  async findOne(@Param('userID') id: number): Promise<RoomDto> {
-    return this.UserService.findOne(id);
+  @Get(':roomID')
+  async findOne(@Param('roomID') id: number): Promise<RoomDto> {
+    return this.roomService.findOne(id);
   }
   @ApiOperation({
-    summary: 'Update Users by id',
-    operationId: 'UpdateUsers',
+    summary: 'Update Rooms by id',
+    operationId: 'UpdateRoom',
   })
   @ApiResponse({ status: 200, type: RoomDto })
-  @Put(':userID')
-  async update(@Param('userID') id: number, @Body() job: RoomDto) {
-    return this.UserService.update(id, job);
+  @Put(':roomID')
+  async update(@Param('roomID') id: number, @Body() job: RoomDto) {
+    return this.roomService.update(id, job);
   }
 
   @ApiOperation({
-    summary: 'Delete Users by id',
-    operationId: 'DeleteUsers',
+    summary: 'Delete Rooms by id',
+    operationId: 'DeleteRoom',
   })
   @ApiResponse({ status: 200, type: RoomDto })
-  @Delete(':userID')
-  async delete(@Param('userID') id: number) {
-    return this.UserService.deleteOne(id);
+  @Delete(':roomID')
+  async delete(@Param('roomID') id: number) {
+    return this.roomService.deleteOne(id);
   }
 }
