@@ -1,33 +1,49 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import { Thirdyear1stsem } from 'src/interfaces/thirdyear1stsem.interface';
+import { SubjectDto } from './subject.dto';
+import { TeacherDto } from './teacher.dto';
+import { RoomDto } from './room.dto';
 
 @Entity('thirdyear1stsem')
 export class Thirdyear1stsemDto implements Thirdyear1stsem {
   @PrimaryGeneratedColumn()
-  thirdyear1stSemID?: string;
+  thirdYear1stSemID?: number;
 
-  @ApiProperty()
-  @Column()
-  subject: string;
+  @ApiProperty({ required: false, type: () => SubjectDto })
+  @ManyToOne(
+    () => SubjectDto,
+    (DescriptiveTitle) => DescriptiveTitle.thirdyear1stSemDescription,
+  )
+  DescriptiveTitle: SubjectDto;
 
-  @ApiProperty()
-  @Column()
-  description: string;
+  @ApiProperty({ required: false, type: () => SubjectDto })
+  @ManyToOne(() => SubjectDto, (Units) => Units.thirdyear1stSemunits, {
+    nullable: true,
+  })
+  units: SubjectDto;
 
-  @ApiProperty()
-  @Column()
-  units: string;
+  @ApiProperty({ required: false, type: () => SubjectDto })
+  @ManyToOne(() => SubjectDto, (Schedule) => Schedule.thirdyear1stSemschedule, {
+    nullable: true,
+  })
+  Schedule: SubjectDto;
 
-  @ApiProperty()
-  @Column()
-  teacher: string;
+  @ApiProperty({ required: false, type: () => Thirdyear1stsemDto })
+  @ManyToOne(() => SubjectDto, (subject) => subject.thirdyear1stSem, {
+    nullable: true,
+  })
+  subject: SubjectDto;
 
-  @ApiProperty()
-  @Column()
-  room: string;
+  @ApiProperty({ required: false, type: () => Thirdyear1stsemDto })
+  @ManyToOne(() => TeacherDto, (teacher) => teacher.thirdyear1stSem, {
+    nullable: true,
+  })
+  teacher: TeacherDto;
 
-  @ApiProperty()
-  @Column()
-  schedule: string;
+  @ApiProperty({ required: false, type: () => Thirdyear1stsemDto })
+  @ManyToOne(() => RoomDto, (room) => room.thirdyear1stSem, {
+    nullable: true,
+  })
+  room: RoomDto;
 }

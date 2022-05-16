@@ -1,33 +1,53 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import { Secondyear1stsem } from 'src/interfaces/secondyear1stsem.interface';
+import { SubjectDto } from './subject.dto';
+import { RoomDto } from './room.dto';
+import { TeacherDto } from './teacher.dto';
 
 @Entity('secondyear1stsem')
 export class Secondyear1stsemDto implements Secondyear1stsem {
   @PrimaryGeneratedColumn()
-  secondyear1stSemID?: string;
+  secondyear1stSemID?: number;
 
-  @ApiProperty()
-  @Column()
-  subject: string;
+  @ApiProperty({ required: false, type: () => SubjectDto })
+  @ManyToOne(
+    () => SubjectDto,
+    (DescriptiveTitle) => DescriptiveTitle.secondYear1stSemDescription,
+  )
+  DescriptiveTitle: SubjectDto;
 
-  @ApiProperty()
-  @Column()
-  description: string;
+  @ApiProperty({ required: false, type: () => SubjectDto })
+  @ManyToOne(() => SubjectDto, (Units) => Units.secondYear1stSemunits, {
+    nullable: true,
+  })
+  units: SubjectDto;
 
-  @ApiProperty()
-  @Column()
-  units: string;
+  @ApiProperty({ required: false, type: () => SubjectDto })
+  @ManyToOne(
+    () => SubjectDto,
+    (Schedule) => Schedule.secondYear1stSemschedule,
+    {
+      nullable: true,
+    },
+  )
+  Schedule: SubjectDto;
 
-  @ApiProperty()
-  @Column()
-  teacher: string;
+  @ApiProperty({ required: false, type: () => Secondyear1stsemDto })
+  @ManyToOne(() => SubjectDto, (subject) => subject.secondYear1stSem, {
+    nullable: true,
+  })
+  subject: SubjectDto;
 
-  @ApiProperty()
-  @Column()
-  room: string;
+  @ApiProperty({ required: false, type: () => Secondyear1stsemDto })
+  @ManyToOne(() => TeacherDto, (teacher) => teacher.secondYear1stSem, {
+    nullable: true,
+  })
+  teacher: TeacherDto;
 
-  @ApiProperty()
-  @Column()
-  schedule: string;
+  @ApiProperty({ required: false, type: () => Secondyear1stsemDto })
+  @ManyToOne(() => RoomDto, (room) => room.secondYear1stSem, {
+    nullable: true,
+  })
+  room: RoomDto;
 }

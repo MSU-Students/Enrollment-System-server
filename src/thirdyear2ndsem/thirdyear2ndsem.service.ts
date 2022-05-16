@@ -7,19 +7,31 @@ import { Repository } from 'typeorm';
 export class Thirdyear2ndsemService {
   constructor(
     @InjectRepository(Thirdyear2ndsemDto)
-    private usersRepository: Repository<Thirdyear2ndsemDto>,
+    private thirdyear2ndsemRepository: Repository<Thirdyear2ndsemDto>,
   ) {}
 
   async create(application: Thirdyear2ndsemDto): Promise<Thirdyear2ndsemDto> {
-    return this.usersRepository.save(application);
+    return this.thirdyear2ndsemRepository.save(application);
   }
   async findAll(): Promise<Thirdyear2ndsemDto[]> {
-    return this.usersRepository.find();
+    return this.thirdyear2ndsemRepository.find({
+      relations: [
+        'DescriptiveTitle',
+        'units',
+        'Schedule',
+        'subject',
+        'teacher',
+        'room',
+      ],
+    });
   }
   async findOne(thirdyear2ndSemID: number): Promise<Thirdyear2ndsemDto> {
-    return this.usersRepository.findOne(thirdyear2ndSemID);
+    return this.thirdyear2ndsemRepository.findOne(thirdyear2ndSemID);
   }
   async update(thirdyear2ndSemID: number, application: Thirdyear2ndsemDto) {
-    return this.usersRepository.update(thirdyear2ndSemID, application);
+    return this.thirdyear2ndsemRepository.update(
+      thirdyear2ndSemID,
+      application,
+    );
   }
 }

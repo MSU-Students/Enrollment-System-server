@@ -1,33 +1,52 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import { Thirdyear2ndsem } from 'src/interfaces/thirdyear2ndsem.interface';
+import { SubjectDto } from './subject.dto';
+import { TeacherDto } from './teacher.dto';
+import { RoomDto } from './room.dto';
 
 @Entity('thirdyear2ndsem')
 export class Thirdyear2ndsemDto implements Thirdyear2ndsem {
   @PrimaryGeneratedColumn()
-  thirdyear2ndSemID?: string;
+  thirdYear2ndSemID?: number;
 
-  @ApiProperty()
-  @Column()
-  subject: string;
+  @ApiProperty({ required: false, type: () => SubjectDto })
+  @ManyToOne(
+    () => SubjectDto,
+    (DescriptiveTitle) => DescriptiveTitle.thirdyear2ndSemDescription,
+    {
+      nullable: true,
+    },
+  )
+  DescriptiveTitle: SubjectDto;
 
-  @ApiProperty()
-  @Column()
-  description: string;
+  @ApiProperty({ required: false, type: () => SubjectDto })
+  @ManyToOne(() => SubjectDto, (Units) => Units.thirdyear2ndSemunits, {
+    nullable: true,
+  })
+  units: SubjectDto;
 
-  @ApiProperty()
-  @Column()
-  units: string;
+  @ApiProperty({ required: false, type: () => SubjectDto })
+  @ManyToOne(() => SubjectDto, (Schedule) => Schedule.thirdyear2ndSemschedule, {
+    nullable: true,
+  })
+  Schedule: SubjectDto;
 
-  @ApiProperty()
-  @Column()
-  teacher: string;
+  @ApiProperty({ required: false, type: () => Thirdyear2ndsemDto })
+  @ManyToOne(() => SubjectDto, (subject) => subject.thirdyear2ndSem, {
+    nullable: true,
+  })
+  subject: SubjectDto;
 
-  @ApiProperty()
-  @Column()
-  room: string;
+  @ApiProperty({ required: false, type: () => Thirdyear2ndsemDto })
+  @ManyToOne(() => TeacherDto, (teacher) => teacher.thirdyear2ndSem, {
+    nullable: true,
+  })
+  teacher: TeacherDto;
 
-  @ApiProperty()
-  @Column()
-  schedule: string;
+  @ApiProperty({ required: false, type: () => Thirdyear2ndsemDto })
+  @ManyToOne(() => RoomDto, (room) => room.thirdyear2ndSem, {
+    nullable: true,
+  })
+  room: RoomDto;
 }

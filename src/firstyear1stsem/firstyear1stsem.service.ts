@@ -14,17 +14,19 @@ export class Firstyear1stsemService {
     return this.firstyear1stsemRepository.save(application);
   }
   async findAll(): Promise<Firstyear1stsemDto[]> {
-    return this.firstyear1stsemRepository.find({});
+    return this.firstyear1stsemRepository.find({
+      relations: [
+        'DescriptiveTitle',
+        'units',
+        'Schedule',
+        'subject',
+        'teacher',
+        'room',
+      ],
+    });
   }
   async findOne(firstyear1stSemID: number): Promise<Firstyear1stsemDto> {
     return this.firstyear1stsemRepository.findOne(firstyear1stSemID);
-  }
-  async filter(keyword: string): Promise<Firstyear1stsemDto[]> {
-    return this.firstyear1stsemRepository.find({
-      relations: ['subjectFirstyear1stsemRepository'],
-      select: ['subject'],
-      where: { purchaseStatus: Like(`%${keyword}%`) },
-    });
   }
   async update(firstyear1stSemID: number, application: Firstyear1stsemDto) {
     return this.firstyear1stsemRepository.update(

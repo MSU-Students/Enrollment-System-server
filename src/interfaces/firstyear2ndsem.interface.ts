@@ -1,9 +1,10 @@
+import { Room } from './room.interface';
+import { Teacher } from './teacher.interface';
 export interface Firstyear2ndsem {
   firstyear2ndSemID?: number;
-  subject: string;
-  description: string;
-  units: string;
-  teacher: string;
-  room: string;
-  schedule: string;
+  SubjectCode?: string;
+  description?: string;
+  Teacher?: string;
+  Room?: string;
+  schedule?: string;
 }
