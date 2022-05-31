@@ -7,22 +7,22 @@ import { Repository } from 'typeorm';
 export class SubjectService {
   constructor(
     @InjectRepository(SubjectDto)
-    private usersRepository: Repository<SubjectDto>,
+    private subjectRepository: Repository<SubjectDto>,
   ) {}
 
   async create(application: SubjectDto): Promise<SubjectDto> {
-    return this.usersRepository.save(application);
+    return this.subjectRepository.save(application);
   }
   async findAll(): Promise<SubjectDto[]> {
-    return this.usersRepository.find();
+    return this.subjectRepository.find();
   }
   async findOne(subjectID: number): Promise<SubjectDto> {
-    return this.usersRepository.findOne(subjectID);
+    return this.subjectRepository.findOne(subjectID);
   }
   async update(subjectID: number, application: SubjectDto) {
-    return this.usersRepository.update(subjectID, application);
+    return this.subjectRepository.update(subjectID, application);
   }
   async deleteOne(subjectID: number) {
-    return this.usersRepository.delete(subjectID);
+    return this.subjectRepository.delete(subjectID);
   }
 }

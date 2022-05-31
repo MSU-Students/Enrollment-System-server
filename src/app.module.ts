@@ -1,3 +1,5 @@
+import { SectionDto } from './entities/section.dto';
+import { SchoolYearDto } from './entities/school-year.dto';
 import { AdmissionDto } from 'src/entities/admission.dto';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -22,28 +24,23 @@ import { Firstyear2ndsemController } from './firstyear2ndsem/firstyear2ndsem.con
 import { Firstyear2ndsemService } from './firstyear2ndsem/firstyear2ndsem.service';
 import { Firstyear1stsemDto } from './entities/firstyear1stsem.dto';
 import { Firstyear2ndsemDto } from './entities/firstyear2ndsem.dto';
-import { Secondyear1stsemController } from './secondyear1stsem/secondyear1stsem.controller';
-import { Secondyear1stsemService } from './secondyear1stsem/secondyear1stsem.service';
-import { Secondyear2ndsemController } from './secondyear2ndsem/secondyear2ndsem.controller';
-import { Secondyear2ndsemService } from './secondyear2ndsem/secondyear2ndsem.service';
-import { Secondyear1stsemDto } from './entities/secondyear1stsem.dto';
-import { Secondyear2ndsemDto } from './entities/secondyear2ndsem.dto';
-import { Thirdyear1stsemController } from './thirdyear1stsem/thirdyear1stsem.controller';
-import { Thirdyear1stsemService } from './thirdyear1stsem/thirdyear1stsem.service';
-import { Thirdyear2ndsemController } from './thirdyear2ndsem/thirdyear2ndsem.controller';
-import { Thirdyear2ndsemService } from './thirdyear2ndsem/thirdyear2ndsem.service';
-import { Thirdyear1stsemDto } from './entities/thirdyear1stsem.dto';
-import { Thirdyear2ndsemDto } from './entities/thirdyear2ndsem.dto';
-import { Fourthyear1stsemController } from './fourthyear1stsem/fourthyear1stsem.controller';
-import { Fourthyear1stsemService } from './fourthyear1stsem/fourthyear1stsem.service';
-import { Fourthyear2ndsemController } from './fourthyear2ndsem/fourthyear2ndsem.controller';
-import { Fourthyear2ndsemService } from './fourthyear2ndsem/fourthyear2ndsem.service';
-import { Fourthyear1stsemDto } from './entities/fourthyear1stsem.dto';
-import { Fourthyear2ndsemDto } from './entities/fourthyear2ndsem.dto';
-import { EnteringController } from './entering/entering.controller';
-import { EnteringService } from './entering/entering.service';
 import { CalcellationController } from './calcellation/calcellation.controller';
 import { CalcellationService } from './calcellation/calcellation.service';
+import { SchoolYearController } from './school-year/school-year.controller';
+import { SchoolYearService } from './school-year/school-year.service';
+import { SectionController } from './section/section.controller';
+import { SectionService } from './section/section.service';
+import { SchedulingController } from './scheduling/scheduling.controller';
+import { SchedulingService } from './scheduling/scheduling.service';
+import { ReportandreportsController } from './reportandreports/reportandreports.controller';
+import { ReportandreportsService } from './reportandreports/reportandreports.service';
+import { CourseController } from './course/course.controller';
+import { CourseService } from './course/course.service';
+import { CourseDto } from './entities/course.dto';
+import { SchedulingDto } from './entities/scheduling.dto';
+import { EnrollmentController } from './enrollment/enrollment.controller';
+import { EnrollmentService } from './enrollment/enrollment.service';
+import { EnrollmentDto } from './entities/enrollment.dto';
 @Module({
   imports: [
     TypeOrmModule.forFeature([
@@ -54,12 +51,11 @@ import { CalcellationService } from './calcellation/calcellation.service';
       AdmissionDto,
       Firstyear1stsemDto,
       Firstyear2ndsemDto,
-      Secondyear1stsemDto,
-      Secondyear2ndsemDto,
-      Thirdyear1stsemDto,
-      Thirdyear2ndsemDto,
-      Fourthyear1stsemDto,
-      Fourthyear2ndsemDto,
+      SchoolYearDto,
+      CourseDto,
+      SectionDto,
+      SchedulingDto,
+      EnrollmentDto,
     ]),
     TypeOrmModule.forRoot({
       type: 'mysql',
@@ -76,15 +72,14 @@ import { CalcellationService } from './calcellation/calcellation.service';
         AdmissionDto,
         Firstyear1stsemDto,
         Firstyear2ndsemDto,
-        Secondyear1stsemDto,
-        Secondyear2ndsemDto,
-        Thirdyear1stsemDto,
-        Thirdyear2ndsemDto,
-        Fourthyear1stsemDto,
-        Fourthyear2ndsemDto,
+        SchoolYearDto,
+        CourseDto,
+        SectionDto,
+        SchedulingDto,
+        EnrollmentDto,
       ],
-      // synchronize: true,
-      // dropSchema: true,
+      synchronize: true,
+      dropSchema: true,
     }),
     AuthModule,
   ],
@@ -96,14 +91,13 @@ import { CalcellationService } from './calcellation/calcellation.service';
     AdmissionController,
     Firstyear1stsemController,
     Firstyear2ndsemController,
-    Secondyear1stsemController,
-    Secondyear2ndsemController,
-    Thirdyear1stsemController,
-    Thirdyear2ndsemController,
-    Fourthyear1stsemController,
-    Fourthyear2ndsemController,
-    EnteringController,
     CalcellationController,
+    SchoolYearController,
+    SectionController,
+    SchedulingController,
+    ReportandreportsController,
+    CourseController,
+    EnrollmentController,
   ],
   providers: [
     UserService,
@@ -113,14 +107,13 @@ import { CalcellationService } from './calcellation/calcellation.service';
     AdmissionService,
     Firstyear1stsemService,
     Firstyear2ndsemService,
-    Secondyear1stsemService,
-    Secondyear2ndsemService,
-    Thirdyear1stsemService,
-    Thirdyear2ndsemService,
-    Fourthyear1stsemService,
-    Fourthyear2ndsemService,
-    EnteringService,
     CalcellationService,
+    SchoolYearService,
+    SectionService,
+    SchedulingService,
+    ReportandreportsService,
+    CourseService,
+    EnrollmentService,
   ],
 })
 export class AppModule {}

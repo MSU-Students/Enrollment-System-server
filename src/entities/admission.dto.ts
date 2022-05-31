@@ -1,6 +1,7 @@
 import { Admission } from './../interfaces/admission.interface';
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { EnrollmentDto } from './enrollment.dto';
 
 @Entity('Admission')
 export class AdmissionDto implements Admission {
@@ -90,4 +91,8 @@ export class AdmissionDto implements Admission {
   @ApiProperty({ example: 'Dimalna MSU' })
   @Column()
   address: string;
+
+  @ApiProperty({ required: false, type: () => EnrollmentDto })
+  @OneToMany(() => EnrollmentDto, (Enrollment) => Enrollment.studentFullName)
+  enrollmentStudentFullName: EnrollmentDto;
 }
