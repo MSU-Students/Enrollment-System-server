@@ -5,6 +5,7 @@ import { EnrollmentDto } from './enrollment.dto';
 
 @Entity('Admission')
 export class AdmissionDto implements Admission {
+  @ApiProperty({ required: false })
   @PrimaryGeneratedColumn()
   admissionID?: number;
 

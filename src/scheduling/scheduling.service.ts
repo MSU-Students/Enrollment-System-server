@@ -18,9 +18,10 @@ export class SchedulingService {
       relations: [
         'DescriptiveTitle',
         'Section',
-        'SubjectCode',
-        'Teacher',
-        'Course',
+        'SubjectCodes',
+        'Teachers',
+        'Courses',
+        'AcademicYear',
       ],
     });
   }

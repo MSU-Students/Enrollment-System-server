@@ -1,7 +1,4 @@
-import { Enrollment } from './../interfaces/enrollment.interface';
-import { Teacher } from './../interfaces/teacher.interface';
 import { TeacherDto } from './teacher.dto';
-import { Section } from './../interfaces/section.interface';
 import { SectionDto } from 'src/entities/section.dto';
 import { CourseDto } from './course.dto';
 import { Scheduling } from './../interfaces/scheduling.interface';
@@ -15,9 +12,11 @@ import {
 } from 'typeorm';
 import { SubjectDto } from './subject.dto';
 import { EnrollmentDto } from './enrollment.dto';
+import { SchoolYearDto } from './school-year.dto';
 
 @Entity('Scheduling')
 export class SchedulingDto implements Scheduling {
+  @ApiProperty({ required: false })
   @PrimaryGeneratedColumn()
   scheduleID?: string;
 
@@ -25,9 +24,12 @@ export class SchedulingDto implements Scheduling {
   @Column()
   yearLevel: string;
 
-  @ApiProperty({ example: '' })
-  @Column()
-  AcademicYear: string;
+  @ApiProperty({ required: false, type: () => SchoolYearDto })
+  @ManyToOne(
+    () => SchoolYearDto,
+    (SchoolYear) => SchoolYear.schedulingSchoolYear,
+  )
+  AcademicYear: SchoolYearDto;
 
   @ApiProperty({ example: '' })
   @Column()
@@ -54,18 +56,18 @@ export class SchedulingDto implements Scheduling {
     () => SubjectDto,
     (SubjectCode) => SubjectCode.schedulingSubjectCode,
   )
-  SubjectCode: string;
+  SubjectCodes: SubjectDto;
 
   @ApiProperty({ required: false, type: () => SubjectDto })
   @ManyToOne(
     () => SubjectDto,
     (DescriptiveTitle) => DescriptiveTitle.schedulingDescriptiveTitle,
   )
-  DescriptiveTitle: string;
+  DescriptiveTitle: SubjectDto;
 
   @ApiProperty({ required: false, type: () => CourseDto })
   @ManyToOne(() => CourseDto, (course) => course.schedulingCourse)
-  Course: string;
+  Courses: CourseDto;
 
   @ApiProperty({ required: false, type: () => SectionDto })
   @ManyToOne(() => SectionDto, (Section) => Section.schedulingSection)
@@ -73,7 +75,7 @@ export class SchedulingDto implements Scheduling {
 
   @ApiProperty({ required: false, type: () => TeacherDto })
   @ManyToOne(() => TeacherDto, (Teacher) => Teacher.schedulingTeacher)
-  Teacher: string;
+  Teachers: SectionDto;
 
   @ApiProperty({ required: false, type: () => EnrollmentDto })
   @OneToMany(() => EnrollmentDto, (Enrollment) => Enrollment.subjectCode)

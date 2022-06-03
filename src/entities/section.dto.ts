@@ -12,6 +12,7 @@ import { TeacherDto } from './teacher.dto';
 
 @Entity('Section')
 export class SectionDto implements Section {
+  @ApiProperty({ required: false })
   @PrimaryGeneratedColumn()
   sectionID?: number;
 
@@ -25,7 +26,7 @@ export class SectionDto implements Section {
 
   @ApiProperty({ required: false, type: () => TeacherDto })
   @ManyToOne(() => TeacherDto, (Teacher) => Teacher.sectionTeacher)
-  sectionTeacher: string;
+  sectionTeachers: TeacherDto;
 
   @OneToMany(() => SectionDto, (Scheduling) => Scheduling.sectionName)
   schedulingSection: SchedulingDto[];

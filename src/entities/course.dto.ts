@@ -5,6 +5,7 @@ import { SchedulingDto } from './scheduling.dto';
 
 @Entity('Course')
 export class CourseDto implements Course {
+  @ApiProperty({ required: false })
   @PrimaryGeneratedColumn()
   courseID?: number;
 

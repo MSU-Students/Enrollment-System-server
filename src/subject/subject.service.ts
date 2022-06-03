@@ -14,7 +14,9 @@ export class SubjectService {
     return this.subjectRepository.save(application);
   }
   async findAll(): Promise<SubjectDto[]> {
-    return this.subjectRepository.find();
+    return this.subjectRepository.find({
+      relations: ['AYCodes'],
+    });
   }
   async findOne(subjectID: number): Promise<SubjectDto> {
     return this.subjectRepository.findOne(subjectID);
