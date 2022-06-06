@@ -9,6 +9,7 @@ import {
 import { ApiProperty } from '@nestjs/swagger';
 import { SchedulingDto } from './scheduling.dto';
 import { TeacherDto } from './teacher.dto';
+import { ReportandreportsDto } from './reportandreports.dto';
 
 @Entity('Section')
 export class SectionDto implements Section {
@@ -30,4 +31,10 @@ export class SectionDto implements Section {
 
   @OneToMany(() => SectionDto, (Scheduling) => Scheduling.sectionName)
   schedulingSection: SchedulingDto[];
+
+  @OneToMany(() => SectionDto, (records) => records.sectionName)
+  recordsection: ReportandreportsDto;
+
+  @OneToMany(() => SectionDto, (Teacher) => Teacher.sectionTeachers)
+  schedulingTeacher: SchedulingDto;
 }

@@ -10,6 +10,7 @@ import {
 } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import { SchedulingDto } from './scheduling.dto';
+import { ReportandreportsDto } from './reportandreports.dto';
 
 @Entity('Subject')
 export class SubjectDto implements Subject {
@@ -43,4 +44,8 @@ export class SubjectDto implements Subject {
   @ApiProperty({ required: false, type: () => SchedulingDto })
   @OneToMany(() => SchedulingDto, (Scheduling) => Scheduling.DescriptiveTitle)
   schedulingDescriptiveTitle: SchedulingDto[];
+
+  @ApiProperty({ required: false, type: () => ReportandreportsDto })
+  @OneToMany(() => ReportandreportsDto, (records) => records.subject)
+  recordsSubjectCode: ReportandreportsDto;
 }

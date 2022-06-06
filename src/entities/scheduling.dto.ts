@@ -74,8 +74,8 @@ export class SchedulingDto implements Scheduling {
   Section: string;
 
   @ApiProperty({ required: false, type: () => TeacherDto })
-  @ManyToOne(() => TeacherDto, (Teacher) => Teacher.schedulingTeacher)
-  Teachers: SectionDto;
+  @ManyToOne(() => TeacherDto, (FullName) => FullName.schedulingTeacher)
+  Teachers: TeacherDto;
 
   @ApiProperty({ required: false, type: () => EnrollmentDto })
   @OneToMany(() => EnrollmentDto, (Enrollment) => Enrollment.subjectCode)

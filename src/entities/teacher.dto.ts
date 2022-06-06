@@ -1,3 +1,4 @@
+import { Scheduling } from './../interfaces/scheduling.interface';
 import { SectionDto } from 'src/entities/section.dto';
 import { SchedulingDto } from 'src/entities/scheduling.dto';
 import { ApiProperty } from '@nestjs/swagger';

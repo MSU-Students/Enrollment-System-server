@@ -4,6 +4,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('User')
 export class UserDto implements User {
+  @ApiProperty({ required: false })
   @PrimaryGeneratedColumn()
   id?: number;
 

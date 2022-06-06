@@ -21,4 +21,5 @@ export interface Admission {
   citizenship: string;
   religion: string;
   address: string;
+  course: string;
 }

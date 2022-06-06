@@ -1,8 +1,10 @@
+import { Section } from './../interfaces/section.interface';
 import { Enrollment } from './../interfaces/enrollment.interface';
-import { Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import { SchedulingDto } from './scheduling.dto';
 import { AdmissionDto } from './admission.dto';
+import { ReportandreportsDto } from './reportandreports.dto';
 
 @Entity('Enrollment')
 export class EnrollmentDto implements Enrollment {
@@ -77,4 +79,8 @@ export class EnrollmentDto implements Enrollment {
   @ApiProperty({ required: false, type: () => SchedulingDto })
   @ManyToOne(() => SchedulingDto, (time2) => time2.enrollmentTime2)
   time2: string;
+
+  @ApiProperty({ required: false, type: () => ReportandreportsDto })
+  @OneToMany(() => ReportandreportsDto, (Section) => Section.Section)
+  recordsection: ReportandreportsDto;
 }

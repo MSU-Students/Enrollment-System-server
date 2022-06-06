@@ -32,6 +32,7 @@ import { SchedulingDto } from './entities/scheduling.dto';
 import { EnrollmentController } from './enrollment/enrollment.controller';
 import { EnrollmentService } from './enrollment/enrollment.service';
 import { EnrollmentDto } from './entities/enrollment.dto';
+import { ReportandreportsDto } from './entities/reportandreports.dto';
 @Module({
   imports: [
     TypeOrmModule.forFeature([
@@ -44,6 +45,7 @@ import { EnrollmentDto } from './entities/enrollment.dto';
       SectionDto,
       SchedulingDto,
       EnrollmentDto,
+      ReportandreportsDto,
     ]),
     TypeOrmModule.forRoot({
       type: 'mysql',
@@ -62,6 +64,7 @@ import { EnrollmentDto } from './entities/enrollment.dto';
         SectionDto,
         SchedulingDto,
         EnrollmentDto,
+        ReportandreportsDto,
       ],
       // synchronize: true,
       // dropSchema: true,

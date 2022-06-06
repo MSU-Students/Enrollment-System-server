@@ -33,7 +33,7 @@ export class CourseController {
     return this.courseService.findAll();
   }
 
-  @ApiOperation({ summary: 'Get Courses by id', operationId: 'GetCourse' })
+  @ApiOperation({ summary: 'Get Courses by id', operationId: 'GetCourseById' })
   @ApiResponse({ status: 200, type: CourseDto })
   @Get(':courseID')
   async findOne(@Param('courseID') id: number): Promise<CourseDto> {

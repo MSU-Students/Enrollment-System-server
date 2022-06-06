@@ -93,6 +93,10 @@ export class AdmissionDto implements Admission {
   @Column()
   address: string;
 
+  @ApiProperty({})
+  @Column()
+  course: string;
+
   @ApiProperty({ required: false, type: () => EnrollmentDto })
   @OneToMany(() => EnrollmentDto, (Enrollment) => Enrollment.studentFullName)
   enrollmentStudentFullName: EnrollmentDto;
