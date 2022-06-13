@@ -1,10 +1,8 @@
-import { Section } from './../interfaces/section.interface';
+import { AdmissionDto } from 'src/entities/admission.dto';
+import { CourseDto } from 'src/entities/course.dto';
 import { Enrollment } from './../interfaces/enrollment.interface';
-import { Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
-import { SchedulingDto } from './scheduling.dto';
-import { AdmissionDto } from './admission.dto';
-import { ReportandreportsDto } from './reportandreports.dto';
 
 @Entity('Enrollment')
 export class EnrollmentDto implements Enrollment {
@@ -12,75 +10,54 @@ export class EnrollmentDto implements Enrollment {
   @PrimaryGeneratedColumn()
   enrollmentID?: string;
 
-  @ApiProperty({ required: false, type: () => SchedulingDto })
-  @ManyToOne(
-    () => SchedulingDto,
-    (SubjectCode) => SubjectCode.enrollmentSubjectCode,
-  )
-  subjectCode: string;
-
   @ApiProperty({ required: false, type: () => AdmissionDto })
   @ManyToOne(
     () => AdmissionDto,
-    (studentFullName) => studentFullName.enrollmentStudentFullName,
+    (studentIdnumber) => studentIdnumber.studentIdnumber,
   )
-  studentFullName: string;
+  studentIdnumber: string;
 
-  @ApiProperty({ required: false, type: () => SchedulingDto })
-  @ManyToOne(
-    () => SchedulingDto,
-    (academicYear) => academicYear.enrollmentacademicYear,
-  )
+  @ApiProperty({})
+  @Column()
   academicYear: string;
 
-  @ApiProperty({ required: false, type: () => SchedulingDto })
-  @ManyToOne(() => SchedulingDto, (yearLevel) => yearLevel.enrollmentyearLevel)
-  yearLevel: string;
-
-  @ApiProperty({ required: false, type: () => SchedulingDto })
-  @ManyToOne(() => SchedulingDto, (semester) => semester.enrollmentsemester)
+  @ApiProperty({})
+  @Column()
   semester: string;
 
-  @ApiProperty({ required: false, type: () => SchedulingDto })
-  @ManyToOne(() => SchedulingDto, (course) => course.enrollmentcourse)
+  @ApiProperty({})
+  @Column()
+  yearLevel: string;
+
+  @ApiProperty({ required: false, type: () => CourseDto })
+  @ManyToOne(() => CourseDto, (Course) => Course.enrollmentcourse)
   course: string;
 
-  @ApiProperty({ required: false, type: () => SchedulingDto })
-  @ManyToOne(() => SchedulingDto, (section) => section.enrollmentsection)
-  section: string;
+  @ApiProperty({})
+  @Column()
+  subjectCode: string;
 
-  @ApiProperty({ required: false, type: () => SchedulingDto })
-  @ManyToOne(() => SchedulingDto, (teacher) => teacher.enrollmentTeacher)
-  teacher: string;
-
-  @ApiProperty({ required: false, type: () => SchedulingDto })
-  @ManyToOne(
-    () => SchedulingDto,
-    (descriptiveTitle) => descriptiveTitle.enrollmentDescriptiveTitle,
-  )
+  @ApiProperty({})
+  @Column()
   descriptiveTitle: string;
 
-  @ApiProperty({ required: false, type: () => SchedulingDto })
-  @ManyToOne(() => SchedulingDto, (units) => units.enrollmentUnits)
+  @ApiProperty({})
+  @Column()
   units: string;
 
-  @ApiProperty({ required: false, type: () => SchedulingDto })
-  @ManyToOne(() => SchedulingDto, (day) => day.enrollmentDay)
-  day: string;
+  @ApiProperty({})
+  @Column()
+  fullName: string;
 
-  @ApiProperty({ required: false, type: () => SchedulingDto })
-  @ManyToOne(() => SchedulingDto, (day2) => day2.enrollmentDay2)
-  day2: string;
+  @ApiProperty({})
+  @Column()
+  Teacher: string;
 
-  @ApiProperty({ required: false, type: () => SchedulingDto })
-  @ManyToOne(() => SchedulingDto, (time) => time.enrollmentTime)
-  time: string;
+  @ApiProperty({})
+  @Column()
+  Section: string;
 
-  @ApiProperty({ required: false, type: () => SchedulingDto })
-  @ManyToOne(() => SchedulingDto, (time2) => time2.enrollmentTime2)
-  time2: string;
-
-  @ApiProperty({ required: false, type: () => ReportandreportsDto })
-  @OneToMany(() => ReportandreportsDto, (Section) => Section.Section)
-  recordsection: ReportandreportsDto;
+  @ApiProperty({})
+  @Column()
+  timeAnddate: string;
 }

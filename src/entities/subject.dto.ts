@@ -1,26 +1,22 @@
-import { SchoolYearDto } from 'src/entities/school-year.dto';
+import { CourseDto } from 'src/entities/course.dto';
+import { EnrollmentDto } from './enrollment.dto';
 import { Subject } from './../interfaces/subject.interface';
 import {
   Column,
   Entity,
-  ManyToMany,
   ManyToOne,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import { SchedulingDto } from './scheduling.dto';
-import { ReportandreportsDto } from './reportandreports.dto';
 
 @Entity('Subject')
 export class SubjectDto implements Subject {
   @ApiProperty({ required: false })
   @PrimaryGeneratedColumn()
   subjectID?: string;
-
-  @ApiProperty({ required: false, type: () => SchoolYearDto })
-  @ManyToOne(() => SchoolYearDto, (SchoolYear) => SchoolYear.subjectSchoolYear)
-  AYCodes: SchoolYearDto;
 
   @ApiProperty({ example: 'GEC 101' })
   @Column()
@@ -34,18 +30,22 @@ export class SubjectDto implements Subject {
   @Column()
   Units: string;
 
-  @ApiProperty({ example: '2021-2022 1st Semester' })
-  @Column()
-  YearLevel: string;
+  @ApiProperty({ required: false, type: () => CourseDto })
+  @ManyToOne(() => CourseDto, (Course) => Course.subjectCourse)
+  course: CourseDto;
 
-  @OneToMany(() => SchedulingDto, (Scheduling) => Scheduling.SubjectCodes)
-  schedulingSubjectCode: SchedulingDto[];
+  @OneToMany(() => SchedulingDto, (Scheduling) => Scheduling.SubjectCode)
+  Offered_SubjectCode: SchedulingDto[];
 
-  @ApiProperty({ required: false, type: () => SchedulingDto })
-  @OneToMany(() => SchedulingDto, (Scheduling) => Scheduling.DescriptiveTitle)
-  schedulingDescriptiveTitle: SchedulingDto[];
+  @ApiProperty({ required: false, type: () => EnrollmentDto })
+  @OneToOne(() => EnrollmentDto, (Subject) => Subject.subjectCode)
+  enrollmentSubjectCode: EnrollmentDto;
 
-  @ApiProperty({ required: false, type: () => ReportandreportsDto })
-  @OneToMany(() => ReportandreportsDto, (records) => records.subject)
-  recordsSubjectCode: ReportandreportsDto;
+  @ApiProperty({ required: false, type: () => EnrollmentDto })
+  @OneToOne(() => EnrollmentDto, (Subject) => Subject.descriptiveTitle)
+  enrollmentDescriptiveTitle: EnrollmentDto;
+
+  @ApiProperty({ required: false, type: () => EnrollmentDto })
+  @OneToOne(() => EnrollmentDto, (Subject) => Subject.units)
+  enrollmentUnits: EnrollmentDto;
 }

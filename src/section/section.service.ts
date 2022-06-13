@@ -14,9 +14,7 @@ export class SectionService {
     return this.sectionRepository.save(application);
   }
   async findAll(): Promise<SectionDto[]> {
-    return this.sectionRepository.find({
-      relations: ['sectionTeachers'],
-    });
+    return this.sectionRepository.find();
   }
   async findOne(SectionID: number): Promise<SectionDto> {
     return this.sectionRepository.findOne(SectionID);

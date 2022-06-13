@@ -1,3 +1,4 @@
+import { RoomDto } from 'src/entities/room.dto';
 import { SectionDto } from './entities/section.dto';
 import { SchoolYearDto } from './entities/school-year.dto';
 import { AdmissionDto } from 'src/entities/admission.dto';
@@ -33,6 +34,8 @@ import { EnrollmentController } from './enrollment/enrollment.controller';
 import { EnrollmentService } from './enrollment/enrollment.service';
 import { EnrollmentDto } from './entities/enrollment.dto';
 import { ReportandreportsDto } from './entities/reportandreports.dto';
+import { RoomController } from './room/room.controller';
+import { RoomService } from './room/room.service';
 @Module({
   imports: [
     TypeOrmModule.forFeature([
@@ -46,6 +49,7 @@ import { ReportandreportsDto } from './entities/reportandreports.dto';
       SchedulingDto,
       EnrollmentDto,
       ReportandreportsDto,
+      RoomDto,
     ]),
     TypeOrmModule.forRoot({
       type: 'mysql',
@@ -65,9 +69,10 @@ import { ReportandreportsDto } from './entities/reportandreports.dto';
         SchedulingDto,
         EnrollmentDto,
         ReportandreportsDto,
+        RoomDto,
       ],
-      // synchronize: true,
-      // dropSchema: true,
+      synchronize: true,
+      dropSchema: true,
     }),
     AuthModule,
   ],
@@ -83,6 +88,7 @@ import { ReportandreportsDto } from './entities/reportandreports.dto';
     ReportandreportsController,
     CourseController,
     EnrollmentController,
+    RoomController,
   ],
   providers: [
     UserService,
@@ -96,6 +102,7 @@ import { ReportandreportsDto } from './entities/reportandreports.dto';
     ReportandreportsService,
     CourseService,
     EnrollmentService,
+    RoomService,
   ],
 })
 export class AppModule {}

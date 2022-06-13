@@ -1,15 +1,16 @@
-import { Section } from './../interfaces/Section.interface';
+import { Section } from './../interfaces/section.interface';
+import { EnrollmentDto } from './enrollment.dto';
 import {
   Column,
   Entity,
   ManyToOne,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import { SchedulingDto } from './scheduling.dto';
 import { TeacherDto } from './teacher.dto';
-import { ReportandreportsDto } from './reportandreports.dto';
 
 @Entity('Section')
 export class SectionDto implements Section {
@@ -25,16 +26,35 @@ export class SectionDto implements Section {
   @Column()
   sectionName: string;
 
-  @ApiProperty({ required: false, type: () => TeacherDto })
-  @ManyToOne(() => TeacherDto, (Teacher) => Teacher.sectionTeacher)
-  sectionTeachers: TeacherDto;
+  @ApiProperty({})
+  @Column()
+  time1: string;
 
+  @ApiProperty({})
+  @Column()
+  time2: string;
+
+  @ApiProperty({})
+  @Column()
+  day1: string;
+
+  @ApiProperty({})
+  @Column()
+  day2: string;
+
+  // @ApiProperty({ required: false, type: () => TeacherDto })
+  // @ManyToOne(() => TeacherDto, (Teacher) => Teacher.sectionTeacher)
+  // sectionTeachers: TeacherDto;
+
+  @ApiProperty({ required: false, type: () => SchedulingDto })
   @OneToMany(() => SectionDto, (Scheduling) => Scheduling.sectionName)
-  schedulingSection: SchedulingDto[];
+  Offeredsection: SchedulingDto[];
 
-  @OneToMany(() => SectionDto, (records) => records.sectionName)
-  recordsection: ReportandreportsDto;
+  // @ApiProperty({ required: false, type: () => TeacherDto })
+  // @OneToMany(() => SchedulingDto, (Teacher) => Teacher.Teachers)
+  // schedulingTeacher: SchedulingDto;
 
-  @OneToMany(() => SectionDto, (Teacher) => Teacher.sectionTeachers)
-  schedulingTeacher: SchedulingDto;
+  // @ApiProperty({ required: false, type: () => EnrollmentDto })
+  // @OneToOne(() => EnrollmentDto, (Section) => Section.section)
+  // enrollmentsection: EnrollmentDto;
 }

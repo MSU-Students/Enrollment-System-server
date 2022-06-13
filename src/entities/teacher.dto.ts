@@ -1,3 +1,4 @@
+import { EnrollmentDto } from './enrollment.dto';
 import { Scheduling } from './../interfaces/scheduling.interface';
 import { SectionDto } from 'src/entities/section.dto';
 import { SchedulingDto } from 'src/entities/scheduling.dto';
@@ -24,8 +25,12 @@ export class TeacherDto implements Teacher {
   Specialization: string;
 
   @OneToMany(() => TeacherDto, (Scheduling) => Scheduling.FullName)
-  schedulingTeacher: SchedulingDto[];
+  Offered_Teacher: SchedulingDto[];
 
   @OneToMany(() => TeacherDto, (Section) => Section.FullName)
   sectionTeacher: SectionDto[];
+
+  // @ApiProperty({ required: false, type: () => EnrollmentDto })
+  // @OneToMany(() => EnrollmentDto, (Teacher) => Teacher.teacher)
+  // enrollmentTeacher: EnrollmentDto;
 }

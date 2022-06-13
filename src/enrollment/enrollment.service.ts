@@ -16,20 +16,20 @@ export class EnrollmentService {
   async findAll(): Promise<EnrollmentDto[]> {
     return this.enrollmentRepository.find({
       relations: [
-        'subjectCode',
-        'studentFullName',
-        'academicYear',
-        'yearLevel',
-        'semester',
+        'studentIdnumber',
         'course',
-        'section',
-        'teacher',
-        'descriptiveTitle',
-        'units',
-        'day',
-        'day2',
-        'time',
-        'time2',
+        // 'studentfullname',
+        // 'course',
+        // 'section',
+        // 'yearLevel',
+        // 'semester',
+        // 'teacher',
+        // 'descriptiveTitle',
+        // 'units',
+        // 'day',
+        // 'day2',
+        // 'time',
+        // 'time2',
       ],
     });
   }

@@ -1,17 +1,17 @@
+import { Section } from './section.interface';
+import { Teacher } from './teacher.interface';
 export interface Enrollment {
   enrollmentID?: string;
-  subjectCode: string;
-  studentFullName: string;
+  studentIdnumber: string;
+  fullName: string;
   academicYear: string;
-  yearLevel: string;
   semester: string;
+  yearLevel: string;
   course: string;
-  section: string;
-  teacher: string;
+  Teacher: string;
+  subjectCode: string;
   descriptiveTitle: string;
   units: string;
-  day: string;
-  day2: string;
-  time: string;
-  time2: string;
+  Section: string;
+  timeAnddate: string;
 }

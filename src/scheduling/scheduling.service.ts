@@ -15,14 +15,7 @@ export class SchedulingService {
   }
   async findAll(): Promise<SchedulingDto[]> {
     return this.schedulingRepository.find({
-      relations: [
-        'DescriptiveTitle',
-        'Section',
-        'SubjectCodes',
-        'Teachers',
-        'Courses',
-        'AcademicYear',
-      ],
+      relations: ['SubjectCode', 'Teachers', 'Courses', 'sections', 'room'],
     });
   }
   async findOne(scheduleID: number): Promise<SchedulingDto> {

@@ -1,5 +1,5 @@
 import { Reportandreports } from './../interfaces/reportandreports.interface';
-import { Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import { EnrollmentDto } from './enrollment.dto';
 import { SectionDto } from './section.dto';
@@ -11,11 +11,11 @@ export class ReportandreportsDto implements Reportandreports {
   @PrimaryGeneratedColumn()
   recordsID?: number;
 
-  @ApiProperty({ required: false, type: () => SubjectDto })
-  @ManyToOne(() => SubjectDto, (SubjectCode) => SubjectCode.recordsSubjectCode)
-  subject: string;
-
-  @ApiProperty({ required: false, type: () => SectionDto })
-  @ManyToOne(() => SectionDto, (section) => section.recordsection)
+  @ApiProperty({ required: false })
+  @Column()
   Section: string;
+
+  @ApiProperty({ required: false })
+  @Column()
+  subject: string;
 }

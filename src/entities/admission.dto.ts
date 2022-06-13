@@ -1,6 +1,12 @@
 import { Admission } from './../interfaces/admission.interface';
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+} from 'typeorm';
 import { EnrollmentDto } from './enrollment.dto';
 
 @Entity('Admission')
@@ -98,6 +104,10 @@ export class AdmissionDto implements Admission {
   course: string;
 
   @ApiProperty({ required: false, type: () => EnrollmentDto })
-  @OneToMany(() => EnrollmentDto, (Enrollment) => Enrollment.studentFullName)
-  enrollmentStudentFullName: EnrollmentDto;
+  @OneToMany(() => EnrollmentDto, (fullname) => fullname.studentIdnumber)
+  studentIdnumber: any;
+
+  // @ApiProperty({ required: false, type: () => EnrollmentDto })
+  // @OneToMany(() => EnrollmentDto, (fullname) => fullname.studentfullname)
+  // enrollmentstudentfullname: EnrollmentDto;
 }
