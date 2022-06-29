@@ -16,8 +16,10 @@ export class EnrollmentService {
   async findAll(): Promise<EnrollmentDto[]> {
     return this.enrollmentRepository.find({
       relations: [
-        'studentIdnumber',
-        'course',
+        'cor',
+        // 'studentIdnumber',
+        'Courses',
+        // 'fullName',
         // 'studentfullname',
         // 'course',
         // 'section',

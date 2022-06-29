@@ -1,3 +1,4 @@
+import { AdmissionDto } from 'src/entities/admission.dto';
 import { SubjectDto } from 'src/entities/subject.dto';
 import { Course } from './../interfaces/course.interface';
 import { EnrollmentDto } from './enrollment.dto';
@@ -29,11 +30,15 @@ export class CourseDto implements Course {
   @OneToMany(() => SchedulingDto, (Scheduling) => Scheduling.Courses)
   Offered_Course: SchedulingDto[];
 
-  @ApiProperty({ required: false, type: () => EnrollmentDto })
-  @OneToOne(() => EnrollmentDto, (Course) => Course.course)
-  enrollmentcourse: EnrollmentDto;
+  @ApiProperty({ required: false, type: () => AdmissionDto })
+  @OneToMany(() => AdmissionDto, (Admission) => Admission.Courses)
+  Course: AdmissionDto[];
 
   @ApiProperty({ required: false, type: () => SubjectDto })
   @OneToMany(() => SubjectDto, (Course) => Course.course)
   subjectCourse: SubjectDto;
+
+  @ApiProperty({ required: false, type: () => EnrollmentDto })
+  @OneToMany(() => EnrollmentDto, (Course) => Course.Courses)
+  course: EnrollmentDto;
 }

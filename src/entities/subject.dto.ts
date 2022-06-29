@@ -36,16 +36,4 @@ export class SubjectDto implements Subject {
 
   @OneToMany(() => SchedulingDto, (Scheduling) => Scheduling.SubjectCode)
   Offered_SubjectCode: SchedulingDto[];
-
-  @ApiProperty({ required: false, type: () => EnrollmentDto })
-  @OneToOne(() => EnrollmentDto, (Subject) => Subject.subjectCode)
-  enrollmentSubjectCode: EnrollmentDto;
-
-  @ApiProperty({ required: false, type: () => EnrollmentDto })
-  @OneToOne(() => EnrollmentDto, (Subject) => Subject.descriptiveTitle)
-  enrollmentDescriptiveTitle: EnrollmentDto;
-
-  @ApiProperty({ required: false, type: () => EnrollmentDto })
-  @OneToOne(() => EnrollmentDto, (Subject) => Subject.units)
-  enrollmentUnits: EnrollmentDto;
 }

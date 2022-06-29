@@ -1,6 +1,6 @@
+import { StudentRecordDto } from 'src/entities/student-record.dto';
 import { RoomDto } from 'src/entities/room.dto';
 import { SectionDto } from './entities/section.dto';
-import { SchoolYearDto } from './entities/school-year.dto';
 import { AdmissionDto } from 'src/entities/admission.dto';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -18,8 +18,6 @@ import { AdmissionController } from './admission/admission.controller';
 import { AdmissionService } from './admission/admission.service';
 import { CalcellationController } from './calcellation/calcellation.controller';
 import { CalcellationService } from './calcellation/calcellation.service';
-import { SchoolYearController } from './school-year/school-year.controller';
-import { SchoolYearService } from './school-year/school-year.service';
 import { SectionController } from './section/section.controller';
 import { SectionService } from './section/section.service';
 import { SchedulingController } from './scheduling/scheduling.controller';
@@ -36,6 +34,8 @@ import { EnrollmentDto } from './entities/enrollment.dto';
 import { ReportandreportsDto } from './entities/reportandreports.dto';
 import { RoomController } from './room/room.controller';
 import { RoomService } from './room/room.service';
+import { StudentRecordController } from './student-record/student-record.controller';
+import { StudentRecordService } from './student-record/student-record.service';
 @Module({
   imports: [
     TypeOrmModule.forFeature([
@@ -43,13 +43,13 @@ import { RoomService } from './room/room.service';
       SubjectDto,
       UserDto,
       AdmissionDto,
-      SchoolYearDto,
       CourseDto,
       SectionDto,
       SchedulingDto,
       EnrollmentDto,
       ReportandreportsDto,
       RoomDto,
+      StudentRecordDto,
     ]),
     TypeOrmModule.forRoot({
       type: 'mysql',
@@ -63,16 +63,16 @@ import { RoomService } from './room/room.service';
         SubjectDto,
         UserDto,
         AdmissionDto,
-        SchoolYearDto,
         CourseDto,
         SectionDto,
         SchedulingDto,
         EnrollmentDto,
         ReportandreportsDto,
         RoomDto,
+        StudentRecordDto,
       ],
-      synchronize: true,
-      dropSchema: true,
+      // synchronize: true,
+      // dropSchema: true,
     }),
     AuthModule,
   ],
@@ -82,13 +82,13 @@ import { RoomService } from './room/room.service';
     SubjectController,
     AdmissionController,
     CalcellationController,
-    SchoolYearController,
     SectionController,
     SchedulingController,
     ReportandreportsController,
     CourseController,
     EnrollmentController,
     RoomController,
+    StudentRecordController,
   ],
   providers: [
     UserService,
@@ -96,13 +96,13 @@ import { RoomService } from './room/room.service';
     SubjectService,
     AdmissionService,
     CalcellationService,
-    SchoolYearService,
     SectionService,
     SchedulingService,
     ReportandreportsService,
     CourseService,
     EnrollmentService,
     RoomService,
+    StudentRecordService,
   ],
 })
 export class AppModule {}

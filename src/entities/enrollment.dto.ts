@@ -1,63 +1,60 @@
+import { StudentRecordDto } from './student-record.dto';
 import { AdmissionDto } from 'src/entities/admission.dto';
 import { CourseDto } from 'src/entities/course.dto';
 import { Enrollment } from './../interfaces/enrollment.interface';
-import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import {
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  JoinTable,
+  ManyToMany,
+} from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 
 @Entity('Enrollment')
 export class EnrollmentDto implements Enrollment {
   @ApiProperty({ required: false })
   @PrimaryGeneratedColumn()
-  enrollmentID?: string;
+  enrollmentID?: number;
 
-  @ApiProperty({ required: false, type: () => AdmissionDto })
-  @ManyToOne(
-    () => AdmissionDto,
-    (studentIdnumber) => studentIdnumber.studentIdnumber,
-  )
-  studentIdnumber: string;
-
-  @ApiProperty({})
+  @ApiProperty({ example: 'Regular' })
   @Column()
-  academicYear: string;
+  enteredsubjectCode: string;
 
-  @ApiProperty({})
+  @ApiProperty({ example: 'Regular' })
   @Column()
-  semester: string;
+  enteredsection: string;
 
-  @ApiProperty({})
+  @ApiProperty({ example: 'Regular' })
   @Column()
-  yearLevel: string;
+  entereddescriptiveTitle: string;
+
+  @ApiProperty({ example: 'Regular' })
+  @Column()
+  enteredtime: string;
+
+  @ApiProperty({ example: 'Regular' })
+  @Column()
+  entereddate: string;
+
+  @ApiProperty({ example: 'Regular' })
+  @Column()
+  enteredunits: string;
+
+  @ApiProperty({ example: 'Regular' })
+  @Column()
+  enteredteacher: string;
 
   @ApiProperty({ required: false, type: () => CourseDto })
-  @ManyToOne(() => CourseDto, (Course) => Course.enrollmentcourse)
-  course: string;
+  @ManyToOne(() => CourseDto, (Course) => Course.course)
+  Courses: CourseDto;
 
-  @ApiProperty({})
-  @Column()
-  subjectCode: string;
+  @ManyToMany(() => AdmissionDto)
+  @JoinTable()
+  admission: AdmissionDto[];
 
-  @ApiProperty({})
-  @Column()
-  descriptiveTitle: string;
-
-  @ApiProperty({})
-  @Column()
-  units: string;
-
-  @ApiProperty({})
-  @Column()
-  fullName: string;
-
-  @ApiProperty({})
-  @Column()
-  Teacher: string;
-
-  @ApiProperty({})
-  @Column()
-  Section: string;
-
-  @ApiProperty({})
-  @Column()
-  timeAnddate: string;
+  @ApiProperty({ required: false, type: () => StudentRecordDto })
+  @ManyToOne(() => StudentRecordDto, (cor) => cor.enrolledSub, {})
+  cor: StudentRecordDto;
 }
