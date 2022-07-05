@@ -1,4 +1,3 @@
-import { Course } from './../interfaces/course.interface';
 import { Admission } from './../interfaces/admission.interface';
 import { ApiProperty } from '@nestjs/swagger';
 import {
@@ -8,7 +7,6 @@ import {
   PrimaryGeneratedColumn,
   ManyToOne,
 } from 'typeorm';
-import { EnrollmentDto } from './enrollment.dto';
 import { CourseDto } from './course.dto';
 import { StudentRecordDto } from './student-record.dto';
 
@@ -113,36 +111,4 @@ export class AdmissionDto implements Admission {
   @ApiProperty({ required: false, type: () => StudentRecordDto })
   @OneToMany(() => StudentRecordDto, (IdNum) => IdNum.Idnumber)
   studentIdnumber: StudentRecordDto[];
-
-  // @ApiProperty({ required: false, type: () => StudentRecordDto })
-  // @OneToMany(() => StudentRecordDto, (fullname) => fullname.)
-  // studentFullName: StudentRecordDto[];
-
-  // @ApiProperty({ required: false, type: () => EnrollmentDto })
-  // @OneToMany(() => EnrollmentDto, (IdNum) => IdNum.studentIdnumber)
-  // studentIdnumber: EnrollmentDto;
-
-  // @ApiProperty({ required: false, type: () => EnrollmentDto })
-  // @OneToMany(() => EnrollmentDto, (fullname) => fullname.fullName)
-  // studentFullName: EnrollmentDto;
-
-  // @ApiProperty({ required: false, type: () => EnrollmentDto })
-  // @OneToMany(() => EnrollmentDto, (yearLevel) => yearLevel.yearLevel)
-  // studentYearLevel: EnrollmentDto;
-
-  // @ApiProperty({ required: false, type: () => EnrollmentDto })
-  // @OneToMany(() => EnrollmentDto, (semester) => semester.semester)
-  // studentSemester: EnrollmentDto;
-
-  // @ApiProperty({ required: false, type: () => EnrollmentDto })
-  // @OneToMany(() => EnrollmentDto, (academicYear) => academicYear.academicYear)
-  // studentAcademicYear: EnrollmentDto;
-
-  // @ApiProperty({ required: false, type: () => EnrollmentDto })
-  // @OneToMany(() => EnrollmentDto, (Course) => Course.course)
-  // studentcourse: EnrollmentDto;
-
-  // @ApiProperty({ required: false, type: () => EnrollmentDto })
-  // @OneToMany(() => EnrollmentDto, (fullname) => fullname.studentfullname)
-  // enrollmentstudentfullname: EnrollmentDto;
 }

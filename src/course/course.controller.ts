@@ -33,15 +33,15 @@ export class CourseController {
     return this.courseService.findAll();
   }
 
-  @ApiOperation({ summary: 'Get Courses by id', operationId: 'GetCourseById' })
+  @ApiOperation({ summary: 'Get Courses by id', operationId: 'GetCourse' })
   @ApiResponse({ status: 200, type: CourseDto })
   @Get(':courseID')
   async findOne(@Param('courseID') id: number): Promise<CourseDto> {
     return this.courseService.findOne(id);
   }
   @ApiOperation({
-    summary: 'Update Courses by id',
-    operationId: 'Updatecourse',
+    summary: 'Update Course by id',
+    operationId: 'Updatecourses',
   })
   @ApiResponse({ status: 200, type: CourseDto })
   @Put(':courseID')

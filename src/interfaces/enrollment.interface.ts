@@ -1,5 +1,3 @@
-import { Section } from './section.interface';
-import { Teacher } from './teacher.interface';
 export interface Enrollment {
   enrollmentID?: number;
   enteredsubjectCode: string;

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { AdmissionDto } from 'src/entities/admission.dto';
 import { SubjectDto } from 'src/entities/subject.dto';
 import { Course } from './../interfaces/course.interface';
@@ -6,7 +7,6 @@ import {
   Column,
   Entity,
   OneToMany,
-  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';

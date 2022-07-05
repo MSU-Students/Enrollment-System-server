@@ -1,11 +1,9 @@
+import { StudentRecordDto } from 'src/entities/student-record.dto';
 import { Reportandreports } from './../interfaces/reportandreports.interface';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
-import { EnrollmentDto } from './enrollment.dto';
-import { SectionDto } from './section.dto';
-import { SubjectDto } from './subject.dto';
 
-@Entity('reports&serult')
+@Entity('reports')
 export class ReportandreportsDto implements Reportandreports {
   @ApiProperty({ required: false })
   @PrimaryGeneratedColumn()
@@ -18,4 +16,8 @@ export class ReportandreportsDto implements Reportandreports {
   @ApiProperty({ required: false })
   @Column()
   subject: string;
+
+  @ManyToMany(() => StudentRecordDto)
+  @JoinTable()
+  getSubject: StudentRecordDto[];
 }
